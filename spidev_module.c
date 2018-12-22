@@ -28,7 +28,7 @@
 #include <linux/ioctl.h>
 
 #define _VERSION_ "3.3"
-#define SPIDEV_MAXPATH 4096
+#define SPIDEV_MAXPATH 65535
 
 #define BLOCK_SIZE_CONTROL_FILE "/sys/module/spidev/parameters/bufsiz"
 // The xfwr3 function attempts to use large blocks if /sys/module/spidev/parameters/bufsiz setting allows it.
@@ -169,7 +169,7 @@ SpiDev_writebytes(SpiDevObject *self, PyObject *args)
 	uint8_t	buf[SPIDEV_MAXPATH];
 	PyObject	*obj;
 	PyObject	*seq;
-	char	wrmsg_text[4096];
+	char	wrmsg_text[65535];
 
 	if (!PyArg_ParseTuple(args, "O:write", &obj))
 		return NULL;
@@ -306,7 +306,7 @@ SpiDev_writebytes2_seq_internal(SpiDevObject *self, PyObject *seq, Py_ssize_t le
 {
 	int		status;
 	Py_ssize_t	ii, jj, remain, block_size;
-	char	wrmsg_text[4096];
+	char	wrmsg_text[65535];
 
 	remain = len;
 	jj = 0;
@@ -464,7 +464,7 @@ SpiDev_xfer(SpiDevObject *self, PyObject *args)
 	memset(&xfer, 0, sizeof(xfer));
 #endif
 	uint8_t *txbuf, *rxbuf;
-	char	wrmsg_text[4096];
+	char	wrmsg_text[65535];
 
 	if (!PyArg_ParseTuple(args, "O|IHB:xfer", &obj, &speed_hz, &delay_usecs, &bits_per_word))
 		return NULL;
@@ -622,7 +622,7 @@ SpiDev_xfer2(SpiDevObject *self, PyObject *args)
 	memset(&xfer, 0, sizeof(xfer));
 	Py_END_ALLOW_THREADS
 	uint8_t *txbuf, *rxbuf;
-	char	wrmsg_text[4096];
+	char	wrmsg_text[65535];
 
 	if (!PyArg_ParseTuple(args, "O|IHB:xfer2", &obj, &speed_hz, &delay_usecs, &bits_per_word))
 		return NULL;
@@ -735,7 +735,7 @@ SpiDev_xfer3(SpiDevObject *self, PyObject *args)
 	memset(&xfer, 0, sizeof(xfer));
 	Py_END_ALLOW_THREADS
 	uint8_t *txbuf, *rxbuf;
-	char	wrmsg_text[4096];
+	char	wrmsg_text[65535];
 
 	if (!PyArg_ParseTuple(args, "O|IHB:xfer3", &obj, &speed_hz, &delay_usecs, &bits_per_word))
 		return NULL;
